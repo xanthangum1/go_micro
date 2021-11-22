@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"fmt"
+	"io/ioutil"
 	"net/http"
 	"log"
 	"net/http"
@@ -15,10 +16,10 @@ func NewHello(l *log.Logger) *Hello {
 	return &Hello{l}
 }
 
-func (h*Hello) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
+func (h *Hello) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	log.Println("Hello World")
 	d, err := ioutil.ReadAll(r.Body)
-	if err !=nil {
+	if err != nil {
 		http.Error(rw, "Oops", http.StatusBadRequest)
 		return
 	}
