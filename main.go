@@ -17,10 +17,12 @@ func main() {
 	hh := handlers.NewProducts(l)
 	gh := handlers.NewGoodbye(l)
 
+	// Create servers
 	sm := http.NewServeMux()
 	sm.Handle("/", hh)
 	sm.Handle("/goodbye", gh)
 
+	// create server
 	s := &http.Server{
 		Addr:         ":9090",
 		Handler:      sm,
@@ -29,6 +31,7 @@ func main() {
 		WriteTimeout: 1 * time.Second,
 	}
 
+	// start the server
 	go func() {
 		err := s.ListenAndServe()
 		if err != nil {
